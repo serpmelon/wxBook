@@ -1,5 +1,7 @@
 package com.togo.wx.common.util;
 
+import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver;
+import com.togo.wx.common.constant.CommonConstant;
 import com.togo.wx.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,26 +27,30 @@ import javax.servlet.http.HttpSession;
 @Component
 public final class SessionUtil {
 
+    @Autowired
+    private HttpServletRequest request;
 
     public HttpSession getSession(HttpServletRequest request) {
 
         return request.getSession();
     }
 
-    public void setOpenId() {
+    public void setOpenId(String openId) {
 
+        HttpSession session = getSession(request);
+        session.setAttribute(CommonConstant.OPEN_ID, openId);
     }
 
     public String getOpenId(HttpSession session) {
 
-        Object object = session.getAttribute("openId");
+        Object object = session.getAttribute(CommonConstant.OPEN_ID);
         if (object == null)
             return null;
         else
             return (String) object;
     }
 
-    public String getOpenId(HttpServletRequest request) {
+    public String getOpenId() {
 
         return getOpenId(getSession(request));
     }

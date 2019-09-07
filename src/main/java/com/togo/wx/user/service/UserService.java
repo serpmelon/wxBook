@@ -1,5 +1,6 @@
 package com.togo.wx.user.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.togo.wx.common.entity.ResponseResult;
 import com.togo.wx.common.entity.Result;
 import com.togo.wx.common.util.SessionUtil;
@@ -9,7 +10,6 @@ import com.togo.wx.user.entity.UserEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +35,8 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private WXUtil wxUtil;
+    @Autowired
+    private SessionUtil sessionUtil;
 
     public UserEntity getUser(int id) {
 
@@ -48,21 +50,33 @@ public class UserService {
 //        userMapper.insertUserEntity(userEntity);
     }
 
-    public Result login(String code, HttpServletRequest request) {
+    /**
+     * <pre>
+     * desc : TODO
+     * @author : taiyn
+     * date : 2019-09-07 11:33
+     * @param : [code]
+     * @return com.togo.wx.common.entity.Result
+     * </pre>
+     */
+    public Result login(String code) {
 
-        String openId = SessionUtil.getOpenId(request);
+        String openId = sessionUtil.getOpenId();
         if (StringUtils.isBlank(openId)) {
 
             ResponseResult responseResult = wxUtil.login(code);
 
-            if (responseResult.getCode() != HttpServletResponse.SC_OK){
+            if (responseResult.getCode() != HttpServletResponse.SC_OK) {
 
                 return Result.getErrorResultWithMessage("login error, status: " + responseResult.getCode());
             }
 
-            SessionUtil.
+            JSONObject jsonObject = JSONObject.parseObject(responseResult.getEntity());
+            openId = jsonObject.getString("openId");
+
+            sessionUtil.setOpenId(openId);
         }
 
-        return new Result();
+        return Result.getSuccessResultWithData(openId);
     }
 }
