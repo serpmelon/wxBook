@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.togo.wx.user.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.togo.wx.user.entity.UserEntity">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="appid" jdbcType="VARCHAR" property="appid" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    </resultMap>
+    <insert id="insertUserEntity" parameterType="com.togo.wx.user.entity.UserEntity">
+        insert into user
+        (appid,nickname)
+        values
+        (#{appid}, #{nickname})
+    </insert>
+
+    <select id="getUserEntity" resultType="com.togo.wx.user.entity.UserEntity">
+        select * from user where id = #{id}
+    </select>
+
+</mapper>

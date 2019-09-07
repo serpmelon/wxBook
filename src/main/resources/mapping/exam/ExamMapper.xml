@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.togo.wx.exam.dao.ExamMapper">
+
+    <resultMap id="BaseResultMap" type="com.togo.wx.exam.entity.ExamContentEntity">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="question" jdbcType="VARCHAR" property="question"/>
+        <result column="score" jdbcType="DECIMAL" property="score"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createTime"/>
+        <collection property="answerList" ofType="com.togo.wx.exam.entity.ExamAnswerContent">
+            <result column="answer_id" jdbcType="INTEGER" property="id"/>
+            <result column="question_id" jdbcType="INTEGER" property="questionId"/>
+            <result column="answer" jdbcType="VARCHAR" property="answer"/>
+            <result column="correct" jdbcType="INTEGER" property="correct"/>
+            <result column="answer_is_del" jdbcType="INTEGER" property="isDel"/>
+            <result column="answer_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        </collection>
+    </resultMap>
+    <select id="getAllExamContent" resultMap="BaseResultMap">
+        select q.*, a.id as answer_id, a.question_id, a.answer, a.correct, a.is_del as answer_is_del,
+        a.create_date as answer_create_time
+        from exam_question q, exam_answer a
+        where a.question_id = q.id
+        and a.is_del = 0 and q.is_del = 0
+    </select>
+
+
+</mapper>
