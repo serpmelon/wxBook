@@ -6,7 +6,6 @@ import com.togo.wx.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p></p>
@@ -53,8 +52,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public Result login(@RequestParam String code, HttpServletRequest request) {
+    public Result login(@RequestParam String code) {
 
-        return userService.login(code, request);
+        return userService.login(code);
     }
 }
