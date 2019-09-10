@@ -21,14 +21,14 @@ public class BookApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void tt(){
-
-		String code = "023XmKGi1T2S2u0EHyKi1jcAGi1XmKG6";
-		String result = wxUtil.login(code);
-		System.out.println(result);
-		// 8m+73tCAXuSRG6FqSCUfDg==
-		// oK1g_5fgSW8OzcTEawiZRpAV7GV8
-	}
+//	@Test
+//	public void tt(){
+//
+//		String code = "023XmKGi1T2S2u0EHyKi1jcAGi1XmKG6";
+//		String result = wxUtil.login(code);
+//		System.out.println(result);
+//		// 8m+73tCAXuSRG6FqSCUfDg==
+//		// oK1g_5fgSW8OzcTEawiZRpAV7GV8
+//	}
 
 }
