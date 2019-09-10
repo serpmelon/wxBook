@@ -18,9 +18,9 @@ public class Q2A {
 
     private int questionId;
     private int answerId;
-    private boolean correct;
+    private int correct;
 
-    public Q2A(int qid, int aid, boolean correct) {
+    public Q2A(int qid, int aid, int correct) {
 
         this.questionId = qid;
         this.answerId = aid;
@@ -43,11 +43,11 @@ public class Q2A {
         this.answerId = answerId;
     }
 
-    public boolean isCorrect() {
+    public int getCorrect() {
         return correct;
     }
 
-    public void setCorrect(boolean correct) {
+    public void setCorrect(int correct) {
         this.correct = correct;
     }
 }

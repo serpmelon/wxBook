@@ -1,6 +1,7 @@
 package com.togo.wx.exam.dao;
 
 import com.togo.wx.exam.entity.ExamContentEntity;
+import com.togo.wx.exam.entity.Q2A;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +24,6 @@ import java.util.List;
 public interface ExamMapper {
 
     List<ExamContentEntity> getAllExamContent();
+
+    void insertExamRecord(Q2A qa);
 }

@@ -58,8 +58,9 @@ public class ExamService {
         if (list == null)
             list = new ArrayList<>();
 
-
-        list.add(new Q2A(form.getQuestionId(), form.getAnswerId(), correct));
+        Q2A qa = new Q2A(form.getQuestionId(), form.getAnswerId(), correct ? 1 : 0);
+        list.add(qa);
+        examMapper.insertExamRecord(qa);
 
         answerList.putIfAbsent(mapKey, list);
 

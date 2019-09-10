@@ -17,6 +17,11 @@
             <result column="answer_create_time" jdbcType="TIMESTAMP" property="createTime"/>
         </collection>
     </resultMap>
+
+    <insert id="insertExamRecord" parameterType="com.togo.wx.exam.entity.Q2A">
+        insert into exam_record values (#{id}, #{questionId}， #{answerId}, #{correct})
+    </insert>
+
     <select id="getAllExamContent" resultMap="BaseResultMap">
         select q.*, a.id as answer_id, a.question_id, a.answer, a.correct, a.is_del as answer_is_del,
         a.create_date as answer_create_time
