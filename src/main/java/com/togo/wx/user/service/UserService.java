@@ -72,7 +72,7 @@ public class UserService {
             }
 
             JSONObject jsonObject = JSONObject.parseObject(responseResult.getEntity());
-            openId = jsonObject.getString("openId");
+            openId = jsonObject.getString("openid");
 
             sessionUtil.setOpenId(openId);
         }
