@@ -16,6 +16,7 @@ package com.togo.wx.exam.entity;
  */
 public class Q2A {
 
+    private String appid;
     private int questionId;
     private int answerId;
     private int correct;
@@ -25,6 +26,14 @@ public class Q2A {
         this.questionId = qid;
         this.answerId = aid;
         this.correct = correct;
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
     }
 
     public int getQuestionId() {

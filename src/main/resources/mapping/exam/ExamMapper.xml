@@ -19,7 +19,7 @@
     </resultMap>
 
     <insert id="insertExamRecord" parameterType="com.togo.wx.exam.entity.Q2A">
-        insert into exam_record values (#{id}, #{questionId}， #{answerId}, #{correct})
+        insert into exam_record values (#{appid}, #{questionId}， #{answerId}, #{correct})
     </insert>
 
     <select id="getAllExamContent" resultMap="BaseResultMap">
