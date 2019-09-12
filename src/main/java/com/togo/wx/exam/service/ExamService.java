@@ -60,6 +60,7 @@ public class ExamService {
 
         Q2A qa = new Q2A(form.getQuestionId(), form.getAnswerId(), correct ? 1 : 0);
         list.add(qa);
+        qa.setAppid("123");
         examMapper.insertExamRecord(qa);
 
         answerList.putIfAbsent(mapKey, list);
