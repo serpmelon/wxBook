@@ -53,7 +53,7 @@ public class ExamController {
     public Result score(@RequestBody ScoreForm scoreForm) {
 
         System.out.println(scoreForm);
-        examService.score(scoreForm, "first");
-        return new Result();
+
+        return Result.getSuccessResultWithData(examService.score(scoreForm, "first"));
     }
 }
