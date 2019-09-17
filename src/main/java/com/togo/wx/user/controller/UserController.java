@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "information", method = RequestMethod.GET)
+    @GetMapping(value = "information")
     public Result getUser(@RequestParam int uid){
 
         UserEntity userEntity = userService.getUser(uid);
@@ -40,7 +40,7 @@ public class UserController {
         return result;
     }
 
-    @RequestMapping(value = "information", method = RequestMethod.POST)
+    @PostMapping(value = "information")
     public Result insertUser(@RequestBody UserEntity userEntity) {
 
         if (userEntity != null){
@@ -51,9 +51,15 @@ public class UserController {
         return new Result();
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PostMapping(value = "login")
     public Result login(@RequestParam String code) {
 
         return userService.login(code);
+    }
+
+    @PostMapping(value = "start")
+    public Result startExam() {
+
+        return null;
     }
 }
