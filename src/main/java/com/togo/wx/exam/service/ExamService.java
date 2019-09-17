@@ -70,6 +70,11 @@ public class ExamService {
 
     public boolean isCorrect(ScoreForm form) {
 
+        if(form == null) // 数据异常
+            return false;
+        if(form.getAnswerId() == -1) // 用户答题超时
+            return false;
+
         if (map == null)
             initMap();
 
