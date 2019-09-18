@@ -1,6 +1,7 @@
 package com.togo.wx.common.entity;
 
-import javax.management.relation.RelationSupport;
+import com.togo.wx.common.constant.ResultCode;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p></p>
@@ -18,8 +19,8 @@ import javax.management.relation.RelationSupport;
  */
 public class Result {
 
-    private String msg = "success";
-    private int code = 1;
+    private String message = ResultCode.SUCCESS.getMessage();
+    private int code = ResultCode.SUCCESS.getIndex();
     private boolean success = true;
     private Object data;
 
@@ -27,28 +28,38 @@ public class Result {
 
         Result result = new Result();
         result.data = data;
-        result.msg = message;
+        result.message = message;
         return result;
     }
 
     public static Result getSuccessResultWithData(Object data) {
 
-        return getSuccessResultWithDataAndMessage(data, "success");
+        return getSuccessResultWithDataAndMessage(data, ResultCode.SUCCESS.getMessage());
     }
 
     public static Result getErrorResultWithMessage(String message) {
 
-        return new Result(-1, false, message);
+        return new Result(ResultCode.ERROR_DEFAULT, false, message);
+    }
+
+    public static Result getErrorResultWithMessage(String message, ResultCode resultCode) {
+
+        return new Result(resultCode, false, message);
     }
 
     public Result() {
     }
 
-    public Result(int code, boolean success, String msg) {
+    public Result(ResultCode resultCode, boolean success, String message) {
+
+        this(resultCode.getIndex(), success, StringUtils.isBlank(message) ? resultCode.getMessage() : message);
+    }
+
+    public Result(int code, boolean success, String message) {
 
         this.code = code;
         this.success = success;
-        this.msg = msg;
+        this.message = message;
     }
 
     public Object getData() {
@@ -59,12 +70,12 @@ public class Result {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public int getCode() {
