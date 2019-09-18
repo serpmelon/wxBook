@@ -1,9 +1,13 @@
 package com.togo.wx.user.controller;
 
+import com.togo.wx.common.constant.ResultCode;
 import com.togo.wx.common.entity.Result;
+import com.togo.wx.common.util.SessionUtil;
 import com.togo.wx.user.entity.UserEntity;
 import com.togo.wx.user.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -27,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionUtil sessionUtil;
 
     @GetMapping(value = "information")
     public Result getUser(@RequestParam int uid){
@@ -56,9 +63,15 @@ public class UserController {
 
         return userService.login(code);
     }
-
+    // TODO 2019-09-17 tyntodo 这里增加开始答题记录参加用户
     @PostMapping(value = "start")
     public Result startExam() {
+
+        String openId = sessionUtil.getOpenId();
+        if(StringUtils.isBlank(openId)) {
+
+            return Result.getErrorResultWithMessage(ResultCode.ERROR_HAVE_NOT_LOGIN);
+        }
 
         return null;
     }

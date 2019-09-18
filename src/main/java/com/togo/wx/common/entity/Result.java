@@ -42,6 +42,11 @@ public class Result {
         return new Result(ResultCode.ERROR_DEFAULT, false, message);
     }
 
+    public static Result getErrorResultWithMessage(ResultCode resultCode) {
+
+        return new Result(ResultCode.ERROR_DEFAULT, false, resultCode.getMessage());
+    }
+
     public static Result getErrorResultWithMessage(String message, ResultCode resultCode) {
 
         return new Result(resultCode, false, message);
